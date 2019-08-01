@@ -63,3 +63,26 @@ Zou J, Huss M, Abid A, Mohammadi P, Torkamani A, Telenti A (2019) A primer on de
 
 Machine learning tasks fall within two categories: supervised, where the classification/regression of each data point is predicted using the provided labelled training data set, whereas in unsupervised learning, the goal is learning patterns inherent to the data. The training dataset is used for learning the model parameters, the validation set is used to select the best model, and the test set is kept aside to estimate performance. Deep learning networks have high capacity and are flexible, and so can automatically learn features/patterns with less expert handcrafting. 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tree Lab: Portable genomics for early detection of plant viruses and pests in Sub-Saharan Africa
+Laura M. Boykin, Peter Sseruwagi, Titus Alicai, Elijah Ateka, Ibrahim Umar Mohammed, Jo-Ann L. Stanton, Charles Kayuki, Deogratius Mark, Tarcisius Fute, Joel Erasto, Hilda Bachwenkizi, Brenda Muga, Naomi Mumo, Jenniffer Mwangi, Phillip Abidrabo, Geoffrey Okao-Okuja, Geresemu Omuut, Jacinta Akol, Hellen B. Apio, Francis Osingada, Monica A. Kehoe, David Eccles, Anders Savill, Stephen Lamb, Tonny Kinene, Christopher B. Rawle, Abishek Muralidhar, Kirsty Mayall, Fred Tairo, Joseph Ndunguru
+bioRxiv 702613; doi: https://doi.org/10.1101/702613
+
+This study verified a new DNA extraction and purification technology designed for use with the MinION and MinIT mobile sequencing devices from ONT - PDQeX from MicroGEM. The technology extracts DNA using proteinases and cell wall degrading enzymes, thermo-responsive extractor cartridges and a temperature control unit. This validation was performed in a field setting on cassava plants grown by subsistence farmers in sub-Saharan Africa to detect pathogens, especially viral diseases, in conditions without access to mains power, internet connectivity or laboratory infrastructure and conditions. 
+
+
