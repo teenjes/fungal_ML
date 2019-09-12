@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # This script is designed to be run such that deepbinner is performed on a dataset to demultiplex reads
+# It requires an input directory that contains directories with all reads from a single MinION flowcell - these subdirectories are examined one-by-one by the script
+# It requires an output directory as a location for the deposit of demultiplexed reads. This should be labelled with the flowcell run
+
 
 in_loc="$1"
 out_loc="$2"
