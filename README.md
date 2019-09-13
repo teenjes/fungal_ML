@@ -30,11 +30,9 @@ Contents
 	- Multi_fast5 (Folder)
 	- Basecalled (Folder)
 	- Filtering (Folder)
-    
-    
-    
-- processes (Folder)
-	- README.md (Text)
-		- *Contains a brief rundown on the main 3rd party programs used or to be used and where to find code or further detail (eg. github pages)*
-- papers.txt (Text)
-	- *Contains summaries/reviews of papers for use at a later date*
+- scripts (Folder)
+	- deepbinner_script.sh
+		- *Script for taking an input folder containing fast5 reads and processing them through Deepbinner, specifying an output directory*
+	- tensorflow_test.py
+		- *Script for testing whether TensorFlow, required for Deepbinner, is being run on CPU or GPU*
+
