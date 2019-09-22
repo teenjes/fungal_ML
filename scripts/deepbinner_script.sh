@@ -11,7 +11,6 @@ GREEN='\033[0;32m'
 
 echo -e "${GREEN}This script takes all folders within the input directory ${RED}"$1"${GREEN} and runs Deepbinner of these files to demultiplex the fast5 files within these folders and output them into barcode directories within the output directory ${RED}"$2"${WHITE}"
 
-
 for d in "$1"/*/; do
 	echo "$d"
 	echo "$2"
