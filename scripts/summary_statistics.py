@@ -108,7 +108,7 @@ if args.verbose:
     
 # Create a dictionary containing the statistics for the filtered dataset
     # Total no. frDNA reads, Min. read length, Max. read length, Mean read length, Median read length, Quality score
-stats_dict = {'number of frDNA reads':len(full_paf_lengths),'minimum read length':min(full_paf_lengths),'maximum read length':max(full_paf_lengths),'mean read length':"{:.0f}".format(np.mean(full_paf_lengths)),'median read length':"{:.0f}".format(np.median(full_paf_lengths)), 'min_qscore':"{:.2f}".format(float(min(summary_frame[1]))), 'max_qscore':"{:.2f}".format(float(max(summary_frame[1]))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))}
+stats_dict = {'number of frDNA reads':len(full_paf_lengths),'minimum read length':min(full_paf_lengths),'maximum read length':max(full_paf_lengths),'mean read length':"{:.0f}".format(np.mean(full_paf_lengths)),'median read length':"{:.0f}".format(np.median(full_paf_lengths)), 'min_qscore':"{:.2f}".format(min(summary_frame[1].astype(float))), 'max_qscore':"{:.2f}".format(max(summary_frame[1].astype(float))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))}
 stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])
 print(stats.head())     
               
