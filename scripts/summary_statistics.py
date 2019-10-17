@@ -25,6 +25,7 @@ BLUE='\033[0;34m'
 RED='\033[0;31m'
 NC='\033[0m'
 GREEN='\033[0;32m'
+PURPLE='\033[1;35m'
 
 parser = argparse.ArgumentParser(description="""
 The goal of this program is to examine the distribution of reads within
@@ -40,6 +41,8 @@ parser.add_argument("full_file", help="The full, unfiltered file containing all 
 parser.add_argument("input_folder", help="The destination folder within which the .paf files are generated")
 parser.add_argument("output_folder", help="The destination folder for any outputs from this script - including summary statistics file and plots")
 args = parser.parse_args()
+
+print('\033[0;35m'+'START'+'\033[1;37m')
 
 output_folder = args.output_folder.rsplit('/', 1)[-2]
 input_folder = args.input_folder.rsplit('/', 1)[-2]
@@ -109,8 +112,7 @@ if args.verbose:
 # Create a dictionary containing the statistics for the filtered dataset
     # Total no. frDNA reads, Min. read length, Max. read length, Mean read length, Median read length, Quality score
 stats_dict = {'number of frDNA reads':len(full_paf_lengths),'minimum read length':min(full_paf_lengths),'maximum read length':max(full_paf_lengths),'mean read length':"{:.0f}".format(np.mean(full_paf_lengths)),'median read length':"{:.0f}".format(np.median(full_paf_lengths)), 'min_qscore':"{:.2f}".format(min(summary_frame[1].astype(float))), 'max_qscore':"{:.2f}".format(max(summary_frame[1].astype(float))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))}
-stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])
-print(stats.head())     
+stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])    
               
 ax = sns.distplot(full_paf_lengths, color="k", kde=False, bins=5000)
 ax.set(xlim=(250, 3500))
@@ -135,3 +137,5 @@ if args.verbose:
 stats.to_csv('/'.join([output_folder, 'frDNA_statistics.csv']), index=False)
 if args.verbose:
     print('\033[0;32m' + "Summary statistics file saved to " + '/'.join([output_folder, 'frDNA_statistics.csv']) + '\033[1;37m')
+    
+print('\033[0;35m'+'END'+'\033[1;37m')
