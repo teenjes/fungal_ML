@@ -102,16 +102,15 @@ summary_list = []
 for column, row in summ_stats_csv.iterrows():
     if row['read_id'] in full_keys:
         summary_list.append([row['read_id'], row['mean_qscore_template']])
+summary_frame = pd.DataFrame(summary_list)
 if args.verbose:
     print('\033[0;34m' + "Finished with " + 'Basecalled/'+'/'.join(args.full_file.rsplit('/')[-3:-1])+'/sequencing_summary.txt' + '\033[1;37m')
-
-
     
 # Create a dictionary containing the statistics for the filtered dataset
     # Total no. frDNA reads, Min. read length, Max. read length, Mean read length, Median read length, Quality score
-stats_dict = {'number of frDNA reads':len(full_paf_lengths),'minimum read length':min(full_paf_lengths),'maximum read length':max(full_paf_lengths),'mean read length':"{:.0f}".format(np.mean(full_paf_lengths)),'median read length':"{:.0f}".format(np.median(full_paf_lengths)), 'min_qscore':"{:.0f}".format(int(min(summary_list[1]))), 'max_qscore':"{:.0f}".format(int(max(summary_list[1]))), 'mean_qscore':"{:.0f}".format(np.mean(summary_list[1])), 'median_qscore':"{:.0f}".format(np.median(summary_list[1]))}
+stats_dict = {'number of frDNA reads':len(full_paf_lengths),'minimum read length':min(full_paf_lengths),'maximum read length':max(full_paf_lengths),'mean read length':"{:.0f}".format(np.mean(full_paf_lengths)),'median read length':"{:.0f}".format(np.median(full_paf_lengths)), 'min_qscore':"{:.2f}".format(float(min(summary_frame[1]))), 'max_qscore':"{:.2f}".format(float(max(summary_frame[1]))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))}
 stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])
-        
+print(stats.head())     
               
 ax = sns.distplot(full_paf_lengths, color="k", kde=False, bins=5000)
 ax.set(xlim=(250, 3500))

@@ -1,2 +1,2 @@
-number of frDNA reads,minimum read length,maximum read length,mean read length,median read length
-143363,284,35613,2780,2876
+number of frDNA reads,minimum read length,maximum read length,mean read length,median read length,min_qscore,max_qscore,mean_qscore,median_qscore
+143363,284,35613,2780,2876,10,10,8,8
