@@ -18,7 +18,7 @@ for subdirectory in "$1"*; do
 			remove2='merged.fastq'
 			output1=${file//$remove1/}
 			output2=${output1//$remove2/}
-			python ../scripts/summary_statistics.py "$file" Python_Processing/"$output2" Stats/"$output2" -v
+			python ../scripts/summary_statistics.py "$file" Python_Processing/"$output2" Length_Filtered/"$output2" -v
 		done
 	done
 done
