@@ -106,8 +106,6 @@ for key in length_filt_dict:
     length_filt_lens.append(len(length_filt_dict[key].seq))
     len_filt_keys.append(key)
     
-print(len(length_filt_lens))
-    
 # Extract the qscores
 # if args.verbose:
 #     print('\033[0;34m' + "Loading " + 'Basecalled/'+'/'.join(args.full_file.rsplit('/')[-3:-1])+'/sequencing_summary.txt' + '\033[1;37m')
