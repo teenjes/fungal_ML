@@ -106,7 +106,7 @@ if args.verbose:
     
 length_filt_dict = full_dict.copy()
 for key in full_keys:
-    if len(full_dict[key].seq) > (mean-1.645*std) and len(full_dict[key].seq) < (mean+1.645*std):
+    if len(full_dict[key].seq) < (mean-1.645*std) or len(full_dict[key].seq) > (mean+1.645*std):
         del length_filt_dict[key]
 
         
@@ -144,7 +144,7 @@ for key in length_filt_dict:
 # Create a dictionary containing the statistics for the filtered dataset
     # Total no. frDNA reads, Min. read length, Max. read length, Mean read length, Median read length, Quality score
 
-    stats_dict = {'number of frDNA reads':len(length_filt_lens),'minimum read length':min(length_filt_lens),'maximum read length':max(length_filt_lens),'mean read length':"{:.0f}".format(np.mean(length_filt_lens)),'median read length':"{:.0f}".format(np.median(length_filt_lens))
+stats_dict = {'number of frDNA reads':len(length_filt_lens),'minimum read length':min(length_filt_lens),'maximum read length':max(length_filt_lens),'mean read length':"{:.0f}".format(np.mean(length_filt_lens)),'median read length':"{:.0f}".format(np.median(length_filt_lens))
 #               ,'min_qscore':"{:.2f}".format(min(summary_frame[1].astype(float))), 'max_qscore':"{:.2f}".format(max(summary_frame[1].astype(float))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))
              }
 stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])    
