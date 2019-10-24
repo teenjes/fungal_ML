@@ -63,6 +63,7 @@ for key in full_file_dict:
     full_lengths.append(len(full_file_dict[key].seq))
 full_lengths_len = len(full_file_dict)
 
+
 # Plot the spread of read lengths for this barcode
     # Expect to see two peaks - one for EF1a and one for frDNA
 ax = sns.distplot(full_lengths, color="k", kde=False, bins=5000)
@@ -95,16 +96,37 @@ for key in full_dict:
     full_paf_lengths.append(len(full_dict[key].seq))
     full_keys.append(key)
 
-length_filt_dict = {}
-for key in full_keys:
-    if len(full_dict[key].seq) > 2500 and len(full_dict[key].seq) < 3400:
-        length_filt_dict[key] = full_dict[key]
+mean = np.mean(full_paf_lengths)
+std = np.std(full_paf_lengths)
 
+if args.verbose:
+    print('\033[1;33m' + 'Mean read length is %s' % mean + '\033[1;37m')
+    print('\033[1;33m' + 'Standard deviation of read length is %s' % std + '\033[1;37m')
+    
+    
+length_filt_dict = full_dict.copy()
+for key in full_keys:
+    if len(full_dict[key].seq) > (mean-1.645*std) and len(full_dict[key].seq) < (mean+1.645*std):
+        del length_filt_dict[key]
+
+        
+        
+SeqIO.write(length_filt_dict.values(), '/'.join([output_folder, 'length_restricted_reads.fasta']), "fasta")
+if args.verbose:
+    print('\033[1;36m' + 'Saved %s' % ('/'.join([output_folder, 'length_restricted_reads.fasta'])) + '\033[1;37m')     
+    
+    
+    
 length_filt_lens = []
 len_filt_keys = []
 for key in length_filt_dict:
     length_filt_lens.append(len(length_filt_dict[key].seq))
     len_filt_keys.append(key)
+
+    
+    
+
+
     
 # Extract the qscores
 # if args.verbose:
@@ -121,7 +143,8 @@ for key in length_filt_dict:
     
 # Create a dictionary containing the statistics for the filtered dataset
     # Total no. frDNA reads, Min. read length, Max. read length, Mean read length, Median read length, Quality score
-stats_dict = {'number of frDNA reads':len(length_filt_lens),'minimum read length':min(length_filt_lens),'maximum read length':max(length_filt_lens),'mean read length':"{:.0f}".format(np.mean(length_filt_lens)),'median read length':"{:.0f}".format(np.median(length_filt_lens))
+
+    stats_dict = {'number of frDNA reads':len(length_filt_lens),'minimum read length':min(length_filt_lens),'maximum read length':max(length_filt_lens),'mean read length':"{:.0f}".format(np.mean(length_filt_lens)),'median read length':"{:.0f}".format(np.median(length_filt_lens))
 #               ,'min_qscore':"{:.2f}".format(min(summary_frame[1].astype(float))), 'max_qscore':"{:.2f}".format(max(summary_frame[1].astype(float))), 'mean_qscore':"{:.2f}".format(np.mean(summary_frame[1].astype(float))), 'median_qscore':"{:.2f}".format(np.median(summary_frame[1].astype(float)))
              }
 stats = pd.DataFrame(stats_dict, index=['%s' % '/'.join(args.full_file.rsplit('/')[-3:-1])])    
@@ -138,7 +161,7 @@ if args.verbose:
     print('\033[0;32m' + "frDNA spread image file saved to " + '/'.join([output_folder, 'frDNA_len_filt_full.png']) + '\033[1;37m')
 
 cx = sns.distplot(length_filt_lens, color="k", kde=False)
-cx.set(xlim=(2400, 3500))
+cx.set(xlim=((mean-1.645*std)-100, (mean+1.645*std)+100))
 cx.set_title("frDNA reads for %s" % '/'.join(args.full_file.rsplit('/')[-3:-1]), fontsize=15)
 cx.set_xlabel("Length of read", fontsize=13)
 cx.set_ylabel("Number of reads", fontsize=13)
@@ -150,6 +173,6 @@ if args.verbose:
 
 stats.to_csv('/'.join([output_folder, 'frDNA_len_filt_statistics.csv']), index=False)
 if args.verbose:
-    print('\033[0;32m' + "Summary statistics file saved to " + '/'.join([output_folder, 'frDNA__len_filt_statistics.csv']) + '\033[1;37m')
+    print('\033[0;32m' + "Summary statistics file saved to " + '/'.join([output_folder, 'frDNA_len_filt_statistics.csv']) + '\033[1;37m')
     
 print('\033[0;35m'+'END'+'\033[1;37m')
