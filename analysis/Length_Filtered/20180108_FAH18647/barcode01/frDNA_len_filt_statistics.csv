@@ -1,2 +1,2 @@
-number of frDNA reads,minimum read length,maximum read length,mean read length,median read length
-30260,2106,3782,3080,3118
+number of frDNA reads,minimum read length,maximum read length,mean read length,std dev,median read length
+30260,2106,3782,3080,171,3118
