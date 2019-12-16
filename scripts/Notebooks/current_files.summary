@@ -1,0 +1,4 @@
+accnos=/10tb/tmp/TE/honours/analysis/Length_Filtered/20171103_FAH15473/barcode02/length_restricted_reads.bad.accnos
+fasta=/10tb/tmp/TE/honours/analysis/Length_Filtered/20171103_FAH15473/barcode02/length_restricted_reads.pcr.fasta
+oligos=/10tb/tmp/TE/honours/analysis/ITS_primers.oligos
+processors=12
