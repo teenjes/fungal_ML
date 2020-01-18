@@ -26,12 +26,6 @@ from Bio.pairwise2 import format_alignment
 warnings.filterwarnings("ignore")
 import argparse
 
-WHITE='\033[1;37m'
-BLUE='\033[0;34m'
-RED='\033[0;31m'
-NC='\033[0m'
-GREEN='\033[0;32m'
-PURPLE='\033[1;35m'
 
 parser = argparse.ArgumentParser(description="""
 This program extracts a specified number of reads from a fasta
@@ -44,7 +38,7 @@ parser.add_argument("input_file", help="The input file for extraction")
 args = parser.parse_args()
 
 if args.verbose:
-    print('\033[0;31m' + "Input file is " + args.input_file + '\033[1;37m')
+    print("Input file is " + args.input_file + "\n")
 
 keys = []
 test_dict = SeqIO.to_dict(SeqIO.parse(args.input_file,"fasta"))
@@ -52,23 +46,6 @@ for key in test_dict:
     keys.append(key)
 emboss_test = str(test_dict[keys[0]].seq)
 emboss_new = emboss_test.replace('N','').replace('n','').replace('\n','')
-print(emboss_new)
 
-scores_matrix = []
-test100 = SeqIO.to_dict(SeqIO.parse("analysis/Alignment/20171103_FAH15473/barcode02/100_reads.fasta","fasta"))
-for key in test100:
-    alignments = pairwise2.align.globalxx(emboss_new, test100[key].seq, score_only=True)
-    scores_matrix.append(int(alignments))
-
-print(scores_matrix)
-mean = np.mean(scores_matrix)
-median=np.median(scores_matrix)
-f=open((args.input_file[:47]+"scores.txt"),"a+")
-f.write(">%s\t%s\t%s\t\n" % (keys[0], mean, median))
-
-tmp = pd.DataFrame(scores_matrix)
-tmp.to_csv(args.input_file[:47]+"%s.csv" % keys[0],index=False,header=False)
-
-
-with open((args.input_file[:47]+"%s_new.fasta" % keys[0]),"w+") as handle:
-    handle.write(">%s\n" % keys[0] +emboss_new)
+with open(args.input_file[:47]+"clean_consensus.fasta","w+") as handle:
+    handle.write(">%s\n" % keys[0] + emboss_new)
