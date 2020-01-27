@@ -63,4 +63,4 @@ for key in new_dict:
 SeqIO.write(tmp_dict.values(),(args.input_file[:9]+'Alignment'+args.input_file[24:-29]+ args.num_reads + '_reads.fasta'),'fasta')
 
 if args.verbose:
-    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + (args.input_file[:9]+'Alignment'+args.input_file[24:-29]+'for_consensus.fasta') + '\033[1;37m')
+    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + (args.input_file[:9]+'Alignment'+args.input_file[24:-29]+ args.num_reads + '_reads.fasta') + '\033[1;37m')
