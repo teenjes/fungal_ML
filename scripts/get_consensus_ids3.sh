@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/bin/bash                                                                                             
 # This should be run in the ANALYSIS folder
 
 WHITE='\033[1;37m'
@@ -12,6 +11,6 @@ echo -e "${GREEN}This script works through all files (using those in the ${RED}"
 
 
 for file in "$1"*/*/length_restricted_reads.fasta; do
-	python ../scripts/get_cons_ids.py $file -v
-	rm *.logfile
-done
+	        python ../scripts/get_cons_ids3.py $file -v
+		        rm *.logfile
+		done

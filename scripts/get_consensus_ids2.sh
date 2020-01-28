@@ -12,6 +12,6 @@ echo -e "${GREEN}This script works through all files (using those in the ${RED}"
 
 
 for file in "$1"*/*/length_restricted_reads.fasta; do
-	python ../scripts/get_cons_ids.py $file -v
-	rm *.logfile
-done
+	        python ../scripts/get_cons_ids2.py $file -v
+		        rm *.logfile
+		done

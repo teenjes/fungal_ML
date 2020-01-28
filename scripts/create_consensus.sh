@@ -10,10 +10,10 @@ GREEN='\033[0;32m'
 echo -e "${GREEN}This script works through all files (using those in the ${RED}"$1"${GREEN} directory for reference) and runs the summary_statistics python script to get summary statistics and figures for each file ${WHITE}"
 
 
-for file in "$1"*/*/*consensus.fasta; do
+for file in "$1"*/*/for_consensus2.fasta; do
 	STR=$file
 	starter=${file%/*}
-        ender='consensus_100.fasta'
+        ender='consensus2_1000.fasta'
 	comb=$starter/$ender
-	muscle -in $file -out $comb
+	muscle -in $file -out $comb -maxiters 2
 done

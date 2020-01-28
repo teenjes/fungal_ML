@@ -47,30 +47,29 @@ args = parser.parse_args()
 if args.verbose:
     print('\033[0;31m' + "Input file is " + args.input_file + '\033[1;37m')
 
-m = Mothur()
-m.pcr.seqs(fasta=args.input_file,oligos='ITS_primers.oligos',pdiffs=2,rdiffs=2)
-pcr_dict = SeqIO.to_dict(SeqIO.parse(args.input_file[:-5]+"pcr.fasta","fasta"))
+
+pcr_dict = SeqIO.to_dict(SeqIO.parse(args.input_file,"fasta"))
 ids = []
 for key in pcr_dict:
     ids.append(key)
-with open(args.input_file[:-29]+'ids.txt','w') as handle:
+with open(args.input_file[:-29]+'ids2.txt','w') as handle:
     handle.writelines("%s\n" % name for name in ids)
     
 if args.verbose:
-    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + (args.input_file[:-29]+'ids.txt') + '\033[1;37m')
+    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + (args.input_file[:-29]+'ids2.txt') + '\033[1;37m')
     print('\033[0;32m' + ("The number of reads is %s" % len(ids)) + '\033[1;37m')
     
     
 tmp_dict = SeqIO.to_dict(SeqIO.parse(args.input_file,"fasta"))
 new_dict = tmp_dict.copy()
-if len(ids) > 500:
-    keys_list = random.sample(ids,k=500)
+if len(ids) > 1000:
+    keys_list = random.sample(ids,k=1000)
 else:
     print('\033[1;37m' + "LOW READS")
 for key in new_dict:
     if key not in keys_list:
         del tmp_dict[key]
-SeqIO.write(tmp_dict.values(),('Consensus'+args.input_file[15:-29]+'for_consensus_500.fasta'),'fasta')
+SeqIO.write(tmp_dict.values(),('Consensus'+args.input_file[15:-29]+'for_consensus2.fasta'),'fasta')
 
 if args.verbose:
-    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + ('Consensus'+args.input_file[15:-29]+'for_consensus_500.fasta') + '\033[1;37m')
+    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + ('Consensus'+args.input_file[15:-29]+'for_consensus2.fasta') + '\033[1;37m')
