@@ -8,8 +8,7 @@ GREEN='\033[0;32m'
 
 
 echo -e "This script takes the consensus2_1000.fasta file from each species and runs the EMBOSS cons software on it to generate a consensus sequence, then subsequently runs a cleanup python script to remove any 'N's or 'n's from the resultant consensus"
-
-for file in analysis/Consensus/*/*/for_consensus_1000.aln; do
-		cons -sequence $file -outseq ${file%for_consensus_1000.aln}/cons_consensus_1000.fasta -name ${file%for_consensus_1000.aln} -plurality 400.0
-		python scripts/cleanup.py ${file%for_consensus_1000.aln}/cons_consensus_1000.fasta -v
+rm database/custom_database_1000.fasta
+for file in analysis/Consensus/*/*/clean_consensus_1000.fasta; do
+	python scripts/make_database_1000.py $file -v
 done

@@ -47,5 +47,5 @@ for key in test_dict:
 emboss_test = str(test_dict[keys[0]].seq)
 emboss_new = emboss_test.replace('N','').replace('n','').replace('\n','')
 
-with open(args.input_file[:47]+"clean_consensus_1000.fasta","w+") as handle:
+with open(args.input_file[:47]+"clean_consensus_100.fasta","w+") as handle:
     handle.write(">%s\n" % keys[0] + emboss_new)

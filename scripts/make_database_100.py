@@ -28,8 +28,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description="""
-This program cleans a consensus sequence by removing any
-'n' or 'N' characters
+This program writes a cleaned consensus to a database file
 """)
 group = parser.add_mutually_exclusive_group()
 group.add_argument("--verbose", "-v", "--v", action="store_true")
@@ -46,6 +45,6 @@ for key in test_dict:
     keys.append(key)
 emboss_test = str(test_dict[keys[0]].seq)
 emboss_new = emboss_test.replace('N','').replace('n','').replace('\n','')
-
-with open(args.input_file[:47]+"clean_consensus_1000.fasta","w+") as handle:
-    handle.write(">%s\n" % keys[0] + emboss_new)
+    
+with open("database/custom_database_100.fasta","a") as handle:
+    handle.write(">%s\n" % keys[0] + emboss_new + '\n')
