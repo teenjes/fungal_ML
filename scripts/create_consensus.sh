@@ -16,6 +16,6 @@ for file in "$1"*/*/for_consensus_1000.fasta; do
 	starter=${file%/*}
         ender='for_consensus_1000.aln'
 	comb=$starter/$ender
-	muscle -in $file -out $comb -maxiters 2
+	muscle -in $file -out $comb -maxiters 8
 	echo -e "${RED} The output file is $comb ${WHITE}"
 done
