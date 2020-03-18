@@ -78,8 +78,8 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20180108_FAH18647/barcode04': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__metapsilosis',
              '20180108_FAH18647/barcode05': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__orthopsilosis',
              '20180108_FAH18647/barcode06': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__parapsilosis',
-         '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycetes;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not matching in the tree
-             '20180108_FAH18647/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Geotrichum;s__candidum', # !!! issues with UNITE search - basically bad matches
+         '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycetes;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not including
+             '20180108_FAH18647/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Geotrichum;s__candidum', # not including
              '20180108_FAH18647/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__unidentified', # formerly Kluyveromyces lactis
              '20180108_FAH18647/barcode10': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Kluyveromyces;s__marxianus',
              '20180108_FAH18647/barcode11': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Pichiaceae;g__Pichia;s__kudriavzevii',
@@ -94,13 +94,13 @@ for path in path_names:
         key = path[-28:-1]
         if args.verbose:
             print('\033[0;34m' + "Opened barcode " + '\033[0;35m' + key + '\033[1;37m')
-        species_ = phylogeny[key].split(';')[6].split('__')[1]
-        genus_ = phylogeny[key].split(';')[5].split('__')[1]
-        family_ = phylogeny[key].split(';')[4].split('__')[1]
-        order_ = phylogeny[key].split(';')[3].split('__')[1]
-        class_ = phylogeny[key].split(';')[2].split('__')[1]
-        phylum_ = phylogeny[key].split(';')[1].split('__')[1]
-        kingdom_ = phylogeny[key].split(';')[0].split('__')[1]
+        species_ = phylogeny[key].split(';')[6].split('__')[1].lower()
+        genus_ = phylogeny[key].split(';')[5].split('__')[1].lower()
+        family_ = phylogeny[key].split(';')[4].split('__')[1].lower()
+        order_ = phylogeny[key].split(';')[3].split('__')[1].lower()
+        class_ = phylogeny[key].split(';')[2].split('__')[1].lower()
+        phylum_ = phylogeny[key].split(';')[1].split('__')[1].lower()
+        kingdom_ = phylogeny[key].split(';')[0].split('__')[1].lower()
         
         if args.verbose:
             print('\033[1;36m' + "BEGIN RAW"'\033[1;37m')

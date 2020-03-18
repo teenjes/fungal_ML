@@ -1,13 +1,6 @@
 
 import Bio
 from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord as SR
-from Bio.Blast import NCBIXML
-from Bio import pairwise2
-from Bio.pairwise2 import format_alignment
-from Bio import AlignIO
-from Bio.Align import AlignInfo
 import numpy as np
 import pandas as pd
 from pandas import DataFrame as df
