@@ -61,7 +61,7 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20171207_FAH18654/barcode11': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Trichomonascaceae;g__Zygoascus;s__hellenicus', # matches Sugiyamella novakii in UNITE
              '20171207_FAH18654/barcode12': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Aspergillus;s__flavus',
              
-             '20171212_FAH18688/barcode01': 'k__Fungi;p__Basidiomycetes;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__zero',
+             '20171212_FAH18688/barcode01': 'k__Fungi;p__Basidiomycota;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__zero',
              '20171212_FAH18688/barcode02': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Aspergillus;s__unidentified',
          '20171212_FAH18688/barcode03': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Diaporthales;f__Diaporthaceae;g__Diaporthe;s__CCL067',
              '20171212_FAH18688/barcode04': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Diaporthales;f__Diaporthaceae;g__Diaporthe;s__unidentified',
@@ -78,7 +78,7 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20180108_FAH18647/barcode04': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__metapsilosis',
              '20180108_FAH18647/barcode05': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__orthopsilosis',
              '20180108_FAH18647/barcode06': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__parapsilosis',
-         '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycetes;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not including
+         '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycota;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not including
              '20180108_FAH18647/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Geotrichum;s__candidum', # not including
              '20180108_FAH18647/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__unidentified', # formerly Kluyveromyces lactis
              '20180108_FAH18647/barcode10': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Kluyveromyces;s__marxianus',
