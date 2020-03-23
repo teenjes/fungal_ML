@@ -78,8 +78,8 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20180108_FAH18647/barcode04': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__metapsilosis',
              '20180108_FAH18647/barcode05': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__orthopsilosis',
              '20180108_FAH18647/barcode06': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__parapsilosis',
-         '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycota;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not including
-             '20180108_FAH18647/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Geotrichum;s__candidum', # not including
+#          '20180108_FAH18647/barcode07': 'k__Fungi;p__Basidiomycota;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__gattii', # not including
+#              '20180108_FAH18647/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Geotrichum;s__candidum', # not including
              '20180108_FAH18647/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Candida;s__unidentified', # formerly Kluyveromyces lactis
              '20180108_FAH18647/barcode10': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Kluyveromyces;s__marxianus',
              '20180108_FAH18647/barcode11': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Pichiaceae;g__Pichia;s__kudriavzevii',
@@ -90,7 +90,7 @@ import glob
 path = "/media/MassStorage/tmp/TE/honours/analysis/Consensus/*/*/"
 path_names = glob.glob(path)
 for path in path_names:
-    if path[-13:-1] != 'unclassified' and path[-28:-1] != '20171207_FAH18654/barcode10' and path[-28:-1] != '20171212_FAH18688/barcode10':
+    if path[-13:-1] != 'unclassified' and path[-28:-1] != '20171207_FAH18654/barcode10' and path[-28:-1] != '20171212_FAH18688/barcode10' and path[-28:-1] != '20180108_FAH18647/barcode07' and path[-28:-1] != '20180108_FAH18647/barcode08':
         key = path[-28:-1]
         if args.verbose:
             print('\033[0;34m' + "Opened barcode " + '\033[0;35m' + key + '\033[1;37m')
@@ -126,11 +126,20 @@ for path in path_names:
         length_count = 0
         for entry in length_reads:
             length_count += 1
+            
+        if args.verbose:
+            print('\033[1;36m' + "BEGIN USE" + '\033[1;37m')
+        use_path = "analysis/Length_Filtered/"+key+"/length_restricted_for_use.fasta"
+        use_reads = SeqIO.to_dict(SeqIO.parse(use_path, "fasta"))
+        use_count = 0
+        for entry in use_reads:
+            use_count += 1
 
 
-        add = pd.DataFrame([[species_, genus_, family_, order_, class_, phylum_, kingdom_, raw_count, homology_count, length_count, raw_path, homology_path, length_path]], columns = ['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','path to raw reads','path to homology filtering','path to length filtering'], index=[key])
+        add = pd.DataFrame([[species_, genus_, family_, order_, class_, phylum_, kingdom_, raw_count, homology_count, length_count, use_count, raw_path, homology_path, length_path, use_path]], columns = ['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use'], index=[key])
         summary = summary.append([add])
 summary = summary.sort_index(axis=0)
+summary = summary[['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use']]
 summary.to_csv("analysis/Stats/reference_dataframe.csv")
 if args.verbose:
             print('\033[0;34m' + "Reference Dataframe saved to " + '\033[0;35m' + "analysis/Stats/reference_dataframe.csv" + '\033[1;37m')

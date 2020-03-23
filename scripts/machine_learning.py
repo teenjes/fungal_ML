@@ -44,8 +44,15 @@ def numberfy(SeqIO_dict, seq_len, nsubsample):
     
     for key in randkeys:
         seq = str(SeqIO_dict[key].seq).replace("A",'0 ')\
-        .replace("C",'1 ').replace("G",'2 ').replace("T",'3 ')
-        seq_new = seq + '4 '*(seq_len -int(len(seq)/2))
+        .replace("C",'1 ').replace("G",'2 ').replace("T",'3 ')\
+        .replace("a",'0 ').replace("c",'1 ').replace("g",'2 ')\
+        .replace("t",'3 ')
+        seq_new = seq + '4 '*(seq_len - int(len(seq)/2))
+        if seq_new.find('t') != -1:
+            print(seq_new.find('t'))
+            print("ERROR - strange value in sequence")
+            print(seq_new)
+            exit()
         num_dict[key] = list(map(int, seq_new.split(' ')[:-1]))
     return num_dict
 
@@ -111,10 +118,10 @@ ref_df = pd.read_csv(ref_df_fn, index_col=None)
 # check whether the reference dataframe implies there are enough reads
 # to continue given n_reads
 try:
-    if ref_df[ref_df["# reads after length filtering"] \
+    if ref_df[ref_df["# reads for use"] \
               < n_reads].shape[0] > 0 :
         print("These species need more reads.")
-        print(ref_df[ref_df["# reads after length filtering"] \
+        print(ref_df[ref_df["# for use"] \
               < n_reads])
         #exit()
 except:
@@ -143,7 +150,7 @@ elif args.one and args.two:
 # where the values are that index's path's dataframe
 SeqIO_dicts = {}
 for index in indices:
-    fasta_path = ref_df.loc[index, 'path to length filtering']
+    fasta_path = ref_df.loc[index, 'path for use']
     try:
         SeqIO_dicts[index] = SeqIO.to_dict(SeqIO.parse(fasta_path, "fasta"))
     except:
@@ -187,11 +194,11 @@ else:
     min_vals = []
     for class_, n_class in count_dict.items():
         if n_class == min(count_dict.values()):
-            min_vals.append(ref_df[ref_df.iloc[:,location] == class_]['# reads after length filtering'].min())
+            min_vals.append(ref_df[ref_df.iloc[:,location] == class_]['# for use'].min())
     if min(min_vals) % 2 == 0:
-        minimum_value = min(min_vals)
+        minimum_value = int(min(min_vals))
     else:
-        minimum_value = min(min_vals)-1
+        minimum_value = int(min(min_vals)-1)
     if args.verbose:
         print('minimum number of reads is', minimum_value)
     class_lens_ind = []
@@ -206,8 +213,8 @@ else:
 
         for key, n_class in count_dict.items():
             s_reads = int(minimum_value/n_class)
-            if ref_df[ref_df.loc[:,col_name]==key]['# reads after length filtering'].min() < s_reads:
-                minimum_value = ref_df[ref_df.loc[:,col_name]==key]['# reads after length filtering'].min()/n_class
+            if ref_df[ref_df.loc[:,col_name]==key]['# for use'].min() < s_reads:
+                minimum_value = ref_df[ref_df.loc[:,col_name]==key]['# for use'].min()/n_class
                 s_reads = int(minimum_value/n_class)
             if args.verbose:
                 print('The class is', key, 'and the number of reads to be subsampled is', s_reads)
@@ -322,7 +329,7 @@ if args.verbose:
 in_dim = X_train.shape[1]
 
 # run the model as defined in the get_model function
-# model = get_model(X_train, Y_train, num_class)
+model = get_model(X_train, Y_train, num_class)
 
 # plot? the history of the model training accuracy vs val_accuracy
     # could probably put this into a function as well
