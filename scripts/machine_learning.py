@@ -17,6 +17,8 @@ from keras.layers import Dense
 from keras.utils import plot_model
 import math
 import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.metrics import confusion_matrix,classification_report,accuracy_score,precision_score,recall_score,f1_score
 
 def max_seq_len(SeqIO_dict):
     """
@@ -118,12 +120,12 @@ ref_df = pd.read_csv(ref_df_fn, index_col=None)
 # check whether the reference dataframe implies there are enough reads
 # to continue given n_reads
 try:
-    if ref_df[ref_df["# reads for use"] \
+    if ref_df[ref_df["# for use"] \
               < n_reads].shape[0] > 0 :
         print("These species need more reads.")
         print(ref_df[ref_df["# for use"] \
               < n_reads])
-        #exit()
+        exit()
 except:
     print('Check %s to have the wanted column names' % ref_df_fn)
     
@@ -251,7 +253,8 @@ total_actual_reads = min(class_lens)
 print(class_lens)
 if args.verbose:
     print("Ids order for labels is", order)
-    print("Number of reads subsampled per id is", class_lens_ind)
+    if not (args.one and args.two) and tax_rank != "genus":
+        print("Number of reads subsampled per id is", class_lens_ind)
     print("Total expected reads is", total_expected_reads)
     for i in range(0, len(classes)):
         print(classes[i], "has", class_lens[i], "reads")
@@ -329,14 +332,49 @@ if args.verbose:
 in_dim = X_train.shape[1]
 
 # run the model as defined in the get_model function
-model = get_model(X_train, Y_train, num_class)
+# model = get_model(X_train, Y_train, num_class)
+model = Sequential()
+model.add(Dense(32, activation='relu', input_dim=in_dim))
+model.add(Dense(16, activation='relu'))
+model.add(Dense(num_class, activation='softmax'))
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
 
 # plot? the history of the model training accuracy vs val_accuracy
     # could probably put this into a function as well
-# plt.plot(history.history['accuracy'])
-# plt.plot(history.history['val_accuracy'])
-# plt.title('Model accuracy for Candida species')
-# plt.ylabel('Accuracy')
-# plt.xlabel('Epoch')
-# plt.legend(['Train', 'Test'], loc='upper left')
-# plt.show()
+history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
+model.save(data_root+'models/model_%s_%s_%s.h5' % (args.tax_rank,args.name,args.n_reads))
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model accuracy for Candida species')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
+plt.savefig(data_root+'plot_histories/history_%s_%s_%s.png' % (args.tax_rank,args.name,args.n_reads))
+
+yhat_probs = model.predict(X_test, verbose=0)
+yhat_classes = model.predict_classes(X_test, verbose=0)
+print(yhat_classes.shape)
+print(yhat_classes)
+
+Y_test_ints = np.where(Y_test==1)[1]
+print(Y_test_ints.shape)
+yhat_probs = yhat_probs[:, 0]
+yhat_classes = yhat_classes[:]
+# accuracy: (tp + tn) / (p + n)
+accuracy = accuracy_score(Y_test_ints, yhat_classes)
+print('Accuracy: %f' % accuracy)
+# precision tp / (tp + fp)
+precision = precision_score(Y_test_ints, yhat_classes, average=None)
+print('precision: ', precision)
+# recall: tp / (tp + fn)
+recall = recall_score(Y_test_ints, yhat_classes, average=None)
+print('recall: ', recall)
+# f1: 2 tp / (2 tp + fp + fn)
+f1 = f1_score(Y_test_ints, yhat_classes, average=None)
+print('f1: ', f1)
+# confusion matrix
+matrix = confusion_matrix(Y_test_ints, yhat_classes)
+print(matrix)
+print(pd.crosstab(Y_test_ints, yhat_classes, rownames=['True'], colnames=['Predicted'], margins=True))
