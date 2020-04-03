@@ -294,9 +294,11 @@ else:
             new_seq_list.append(seq_comb[0:class_lens_cumsum[i]][:total_actual_reads])
         else:
             new_seq_list.append(seq_comb[class_lens_cumsum[i-1]:class_lens_cumsum[i]][:total_actual_reads])
+    del seq_comb
     all_data = np.concatenate(new_seq_list, axis = 0)
 
 del class_lens
+del new_seq_list
     
 # determine the number of classes and generate an array of ids
 all_labels_onehot = np.zeros( (total_actual_reads*num_class,num_class) )
