@@ -174,6 +174,7 @@ print('\033[0;32m'+"The maximum sequence length of all sampled sequences is"+ '\
 # pad to the max sequence length
 numSeqIO_dicts = {}
 max_len = max(total_lens)
+del total_lens
 if (args.one and args.two) or tax_rank == "genus":
     for key, value in SeqIO_dicts.items():
         numSeqIO_dicts[key] = numberfy(value, max_len, n_reads)
@@ -192,7 +193,9 @@ else:
         count_dict[class_] = sum(ref_df.iloc[indices,location] == class_)
     if args.verbose:
         print('count_dict is', count_dict)
-
+    
+    del classes
+        
     min_vals = []
     for class_, n_class in count_dict.items():
         if n_class == min(count_dict.values()):
@@ -201,6 +204,11 @@ else:
         minimum_value = int(min(min_vals))
     else:
         minimum_value = int(min(min_vals)-1)
+    if minimum_value > 35000:
+        minimum_value = 35000
+        
+    del min_vals
+    
     if args.verbose:
         print('minimum number of reads is', minimum_value)
     class_lens_ind = []
@@ -230,10 +238,13 @@ else:
         print("no comparison for the rank")
         exit()
 
+del count_dict
 
 location = (ref_df.columns.get_loc(tax_rank)-1)
 col_name = ref_df.columns[location]
 classes = ref_df.iloc[indices,location].unique()
+
+del indices
 
 order = []
 seq_list = []
@@ -247,6 +258,9 @@ for class_ in classes:
             seq_list.append(np.array(list(numSeqIO_dicts[key].values())))
             tmp_sum.append(len(list(numSeqIO_dicts[key].values())))
     class_lens.append(sum(tmp_sum))
+
+del tmp_sum
+del numSeqIO_dicts
     
 total_actual_reads = min(class_lens)
 
@@ -261,22 +275,29 @@ if args.verbose:
     print("Total reads used per class is", sum(class_lens))
     print("Total actual reads available per class is", total_actual_reads)
 
+del class_lens_ind
+    
 seq_comb = np.concatenate(seq_list, axis = 0)
 num_class = len(classes)
+
+del seq_list
 
 if len(set(class_lens)) == 1:
     all_data = seq_comb
 else:
+    print("len(set(class_lens)) != 1")
     class_lens_cumsum = np.cumsum(class_lens)
+    print("class_lens_cumsum defined")
     new_seq_list = []
     for i in range(0, len(class_lens_cumsum)):
         if i == 0:
             new_seq_list.append(seq_comb[0:class_lens_cumsum[i]][:total_actual_reads])
         else:
             new_seq_list.append(seq_comb[class_lens_cumsum[i-1]:class_lens_cumsum[i]][:total_actual_reads])
-
     all_data = np.concatenate(new_seq_list, axis = 0)
 
+del class_lens
+    
 # determine the number of classes and generate an array of ids
 all_labels_onehot = np.zeros( (total_actual_reads*num_class,num_class) )
 for i in range(0, num_class):
@@ -287,17 +308,17 @@ if args.verbose:
     print('all_labels_onehot.shape: ', all_labels_onehot.shape)
     print('all_data.shape:', all_data.shape)
 
-# Separate the data into separate classes based on the labels
-classes_dict = {}
-for i in range(0, len(classes)):
-    classes_dict[classes[i]] = all_data[i*total_actual_reads:(i+1)*total_actual_reads,:]
+# # Separate the data into separate classes based on the labels
+# classes_dict = {}
+# for i in range(0, len(classes)):
+#     classes_dict[classes[i]] = all_data[i*total_actual_reads:(i+1)*total_actual_reads,:]
 
-# Print an entry to visualise this
-# Print the shape of these new arrays to visually verify
-for entry in classes_dict:
-    print(classes_dict[entry][50])
-    if args.verbose:
-        print('%s all_data shape:' % entry, classes_dict[entry].shape)
+# # Print an entry to visualise this
+# # Print the shape of these new arrays to visually verify
+# for entry in classes_dict:
+#     print(classes_dict[entry][50])
+#     if args.verbose:
+#         print('%s all_data shape:' % entry, classes_dict[entry].shape)
 
 samples_count = total_actual_reads*num_class
 if args.verbose:
@@ -315,12 +336,23 @@ if args.verbose:
     print("Training data size:", train_size)
 indices_train = shuffle_indices[0:train_size]
 indices_test = shuffle_indices[train_size+1:samples_count]
+print("indices_test defined")
+
+del train_size
+del samples_count
+del shuffle_indices
 
 # Define the data vs labels for each of the training and test sets
 X_train = all_data[indices_train,:]
+print("X_train defined")
 Y_train = all_labels_onehot[indices_train]
+print("Y_train defined")
 X_test = all_data[indices_test,:]
+print("X_test defined")
 Y_test = all_labels_onehot[indices_test]
+print("Y_test defined")
+
+del all_data
 
 if args.verbose:
     print('X_train.shape : ', X_train.shape)
@@ -346,12 +378,13 @@ history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_si
 model.save(data_root+'models/model_%s_%s_%s.h5' % (args.tax_rank,args.name,args.n_reads))
 plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_accuracy'])
-plt.title('Model accuracy for Candida species')
+plt.title('Model accuracy for %s %s' % (name, tax_rank))
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
 plt.savefig(data_root+'plot_histories/history_%s_%s_%s.png' % (args.tax_rank,args.name,args.n_reads))
+plt.close()
 
 yhat_probs = model.predict(X_test, verbose=0)
 yhat_classes = model.predict_classes(X_test, verbose=0)
@@ -378,3 +411,22 @@ print('f1: ', f1)
 matrix = confusion_matrix(Y_test_ints, yhat_classes)
 print(matrix)
 print(pd.crosstab(Y_test_ints, yhat_classes, rownames=['True'], colnames=['Predicted'], margins=True))
+data = [accuracy]
+datacol =['accuracy']
+count = 1
+for i in precision:
+    data.append(i)
+    datacol.append('precision%i'%count)
+    count += 1
+count = 1
+for i in recall:
+    data.append(i)
+    datacol.append('recall%i'%count)
+    count += 1
+count = 1
+for i in f1:
+    data.append(i)
+    datacol.append('f1%i'%count)
+    count += 1
+stats = pd.DataFrame(data=[data],columns=datacol)
+stats.to_csv(data_root+'models/stats_%s_%s_%s.csv' % (args.tax_rank,args.name,args.n_reads))
