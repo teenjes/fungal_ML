@@ -59,7 +59,7 @@ for item in tmp_dict:
         count_dict[tmp_dict[item]] = count_dict[tmp_dict[item]] + 1
         
 tmp = pd.DataFrame.from_dict(count_dict,orient='index',columns=["Count"])
-tmp.index.names = ['analysis/Consensus/'+args.input_file[19:-18]]
+tmp.index.names = [args.input_file[33:-4]]
 tmp = tmp.sort_values(by="Count",ascending=False)
 
 if args.verbose:

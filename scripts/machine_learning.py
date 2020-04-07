@@ -238,7 +238,10 @@ else:
         print("no comparison for the rank")
         exit()
 
-del count_dict
+try:
+    del count_dict
+except:
+    pass
 
 location = (ref_df.columns.get_loc(tax_rank)-1)
 col_name = ref_df.columns[location]
@@ -259,8 +262,14 @@ for class_ in classes:
             tmp_sum.append(len(list(numSeqIO_dicts[key].values())))
     class_lens.append(sum(tmp_sum))
 
-del tmp_sum
-del numSeqIO_dicts
+try:
+    del tmp_sum
+except:
+    pass
+try:
+    del numSeqIO_dicts
+except:
+    pass
     
 total_actual_reads = min(class_lens)
 
@@ -275,19 +284,23 @@ if args.verbose:
     print("Total reads used per class is", sum(class_lens))
     print("Total actual reads available per class is", total_actual_reads)
 
-del class_lens_ind
+try:
+    del class_lens_ind
+except:
+    pass
     
 seq_comb = np.concatenate(seq_list, axis = 0)
 num_class = len(classes)
 
-del seq_list
+try:
+    del seq_list
+except:
+    pass
 
 if len(set(class_lens)) == 1:
     all_data = seq_comb
 else:
-    print("len(set(class_lens)) != 1")
     class_lens_cumsum = np.cumsum(class_lens)
-    print("class_lens_cumsum defined")
     new_seq_list = []
     for i in range(0, len(class_lens_cumsum)):
         if i == 0:
@@ -297,8 +310,14 @@ else:
     del seq_comb
     all_data = np.concatenate(new_seq_list, axis = 0)
 
-del class_lens
-del new_seq_list
+try:
+    del class_lens
+except:
+    pass
+try:
+    del new_seq_list
+except:
+    pass
     
 # determine the number of classes and generate an array of ids
 all_labels_onehot = np.zeros( (total_actual_reads*num_class,num_class) )
@@ -338,23 +357,30 @@ if args.verbose:
     print("Training data size:", train_size)
 indices_train = shuffle_indices[0:train_size]
 indices_test = shuffle_indices[train_size+1:samples_count]
-print("indices_test defined")
 
-del train_size
-del samples_count
-del shuffle_indices
+try:
+    del train_size
+except:
+    pass
+try:
+    del samples_count
+except:
+    pass
+try:
+    del shuffle_indices
+except:
+    pass
 
 # Define the data vs labels for each of the training and test sets
 X_train = all_data[indices_train,:]
-print("X_train defined")
 Y_train = all_labels_onehot[indices_train]
-print("Y_train defined")
 X_test = all_data[indices_test,:]
-print("X_test defined")
 Y_test = all_labels_onehot[indices_test]
-print("Y_test defined")
 
-del all_data
+try:
+    del all_data
+except:
+    pass
 
 if args.verbose:
     print('X_train.shape : ', X_train.shape)
