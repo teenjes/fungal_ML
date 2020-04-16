@@ -13,7 +13,7 @@ import os
 import random
 import argparse
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Conv1D, Dropout, MaxPooling1D, Flatten
 from keras.utils import plot_model
 import math
 import matplotlib.pyplot as plt
@@ -61,11 +61,17 @@ def numberfy(SeqIO_dict, seq_len, nsubsample):
 
 def get_model(X_train, Y_train, num_class):
     model = Sequential()
-    model.add(Dense(32, activation='relu', input_dim=in_dim))
-    model.add(Dense(16, activation='relu'))
+    model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(5000,1)))
+    model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
+    model.add(Dropout(0.5))
+    model.add(MaxPooling1D(pool_size=2))
+    model.add(Flatten())
+    model.add(Dense(100, activation='relu'))
     model.add(Dense(num_class, activation='softmax'))
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-    model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
+    model.summary()
+    print()
+    model.fit(np.expand_dims(X_train,2), Y_train, validation_data=(np.expand_dims(X_test,2), Y_test), batch_size=128, epochs=10, verbose=1)
     return model
 
 parser = argparse.ArgumentParser(description="""
@@ -393,16 +399,29 @@ in_dim = X_train.shape[1]
 
 # run the model as defined in the get_model function
 # model = get_model(X_train, Y_train, num_class)
+# model = Sequential()
+# model.add(Dense(32, activation='relu', input_dim=in_dim))
+# model.add(Dense(16, activation='relu'))
+# model.add(Dense(num_class, activation='softmax'))
+# model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+# model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
+
 model = Sequential()
-model.add(Dense(32, activation='relu', input_dim=in_dim))
-model.add(Dense(16, activation='relu'))
+model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(X_train.shape[1],1)))
+model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
+model.add(Dropout(0.5))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Flatten())
+model.add(Dense(100, activation='relu'))
 model.add(Dense(num_class, activation='softmax'))
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-# model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
+model.summary()
+print()
+history = model.fit(np.expand_dims(X_train,2), Y_train, validation_data=(np.expand_dims(X_test,2), Y_test), batch_size=128, epochs=10, verbose=1)
 
 # plot? the history of the model training accuracy vs val_accuracy
     # could probably put this into a function as well
-history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
+# history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
 model.save(data_root+'models/model_%s_%s_%s.h5' % (args.tax_rank,args.name,args.n_reads))
 plt.plot(history.history['accuracy'])
 plt.plot(history.history['val_accuracy'])
@@ -414,8 +433,8 @@ plt.show()
 plt.savefig(data_root+'plot_histories/history_%s_%s_%s.png' % (args.tax_rank,args.name,args.n_reads))
 plt.close()
 
-yhat_probs = model.predict(X_test, verbose=0)
-yhat_classes = model.predict_classes(X_test, verbose=0)
+yhat_probs = model.predict(np.expand_dims(X_test,2), verbose=0)
+yhat_classes = model.predict_classes(np.expand_dims(X_test,2), verbose=0)
 print(yhat_classes.shape)
 print(yhat_classes)
 

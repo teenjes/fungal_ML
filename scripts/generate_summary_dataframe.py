@@ -41,11 +41,11 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20171103_FAH15473/barcode03': 'k__Fungi;p__Ascomycota;c__Dothideomycetes;o__Pleosporales;f__Pleosporaceae;g__Pyrenophora;s__tritici-repentis',
              '20171103_FAH15473/barcode04': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Hypocreales;f__Nectriaceae;g__Fusarium;s__oxysporum',
              '20171103_FAH15473/barcode05': 'k__Fungi;p__Ascomycota;c__Pezizomycetes;o__Pezizales;f__Tuberaceae;g__Tuber;s__brumale',
-             '20171103_FAH15473/barcode06': 'k__Fungi;p__Basidiomycota;c__Agaricomyctes;o__Agaricales;f__Cortinariaceae;g__Cortinarius;s__globuliformis',
-             '20171103_FAH15473/barcode07': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Aspergillus;s__niger',
+             '20171103_FAH15473/barcode06': 'k__Fungi;p__Basidiomycota;c__Agaricomyectes;o__Agaricales;f__Cortinariaceae;g__Cortinarius;s__globuliformis',
+             '20171103_FAH15473/barcode07': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Aspergillaceae;g__Aspergillus;s__niger',
              '20171103_FAH15473/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Metschnikowiaceae;g__Clavispora;s__lusitaniae',
         '20171103_FAH15473/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Kluyveromyces;s__unidentified', # formerly Cryptococcus neoformans, matched in both UNITE and tree to Kluyveromyces
-             '20171103_FAH15473/barcode10': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Penicillium;s__chrysogenum',
+             '20171103_FAH15473/barcode10': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Aspergillaceae;g__Penicillium;s__chrysogenum',
              '20171103_FAH15473/barcode11': 'k__Fungi;p__Basidiomycota;c__Microbotryomycetes;o__Sporidiobolales;f__Sporidiobolaceae;g__Rhodotorula;s__mucilaginosa',
              '20171103_FAH15473/barcode12': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Microascales;f__Microascaceae;g__Scedosporium;s__boydii',
              '20171207_FAH18654/barcode01': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Trichomonascaceae;g__Blastobotrys;s__proliferans', # matches Sugiyamella novakii in UNITE
@@ -53,16 +53,16 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
         '20171207_FAH18654/barcode03': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Galactomyces;s__geotrichum', # tree puts it further away from other samples of its type, UNITE calls it Dipodascus
                                      # May have larger issues with Geotrichum candidum - maybe leave out?
              '20171207_FAH18654/barcode04': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Metschnikowiaceae;g__Kodamaea;s__ohmeri',
-             '20171207_FAH18654/barcode05': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Debaryomycetaceae;g__Meyerozyma;s__guillermondii',
+             '20171207_FAH18654/barcode05': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Debaryomycetaceae;g__Meyerozyma;s__guilliermondii',
              '20171207_FAH18654/barcode06': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Phaffomycetaceae;g__Wickerhamomyces;s__anomalus',
              '20171207_FAH18654/barcode07': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Debaryomycetaceae;g__Yamadazyma;s__mexicana',
              '20171207_FAH18654/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Debaryomycetaceae;g__Yamadazyma;s__scolyti',
              '20171207_FAH18654/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Dipodascaceae;g__Yarrowia;s__lipolytica',
              '20171207_FAH18654/barcode11': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Trichomonascaceae;g__Zygoascus;s__hellenicus', # matches Sugiyamella novakii in UNITE
-             '20171207_FAH18654/barcode12': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Aspergillus;s__flavus',
+             '20171207_FAH18654/barcode12': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Aspergillaceae;g__Aspergillus;s__flavus',
              
              '20171212_FAH18688/barcode01': 'k__Fungi;p__Basidiomycota;c__Tremellomycetes;o__Tremellales;f__Tremellaceae;g__Cryptococcus;s__zero',
-             '20171212_FAH18688/barcode02': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Trichocomaceae;g__Aspergillus;s__unidentified',
+             '20171212_FAH18688/barcode02': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Aspergillaceae;g__Aspergillus;s__unidentified',
          '20171212_FAH18688/barcode03': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Diaporthales;f__Diaporthaceae;g__Diaporthe;s__CCL067',
              '20171212_FAH18688/barcode04': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Diaporthales;f__Diaporthaceae;g__Diaporthe;s__unidentified',
              '20171212_FAH18688/barcode05': 'k__Fungi;p__Ascomycota;c__Leotiomycetes;o__Helotiales;f__Dermateaceae;g__Oculimacula;s__yallundae-CCL031',
