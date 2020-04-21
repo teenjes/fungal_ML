@@ -31,7 +31,7 @@ def max_seq_len(SeqIO_dict):
     return max(total_lens)
 
 
-def numberfy(SeqIO_dict, seq_len, nsubsample):
+def numberfy(SeqIO_dict, seq_len, nsubsample, genus_name, species_name):
     """
     Take SeqIO_dict and return SeqIO_dict were bases have been replaced
     with numbers
@@ -43,13 +43,17 @@ def numberfy(SeqIO_dict, seq_len, nsubsample):
     keys = list(SeqIO_dict.keys())
     randkeys = random.sample(keys, k=nsubsample)
     
+    with open(data_root+'models/ids_%s_%s_%s_%s_%s.txt' % (args.tax_rank,args.name,args.n_reads,genus_name,species_name), 'w+') as file:
+        file.writelines("%s\n" % key for key in randkeys)
+    
     
     for key in randkeys:
         seq = str(SeqIO_dict[key].seq).replace("A",'0 ')\
         .replace("C",'1 ').replace("G",'2 ').replace("T",'3 ')\
         .replace("a",'0 ').replace("c",'1 ').replace("g",'2 ')\
         .replace("t",'3 ')
-        seq_new = seq + '4 '*(seq_len - int(len(seq)/2))
+#         seq_new = seq + '4 '*(seq_len - int(len(seq)/2))
+        seq_new = seq + '4 '*(5000 - int(len(seq)/2))
         if seq_new.find('t') != -1:
             print(seq_new.find('t'))
             print("ERROR - strange value in sequence")
@@ -183,7 +187,7 @@ max_len = max(total_lens)
 del total_lens
 if (args.one and args.two) or tax_rank == "genus":
     for key, value in SeqIO_dicts.items():
-        numSeqIO_dicts[key] = numberfy(value, max_len, n_reads)
+        numSeqIO_dicts[key] = numberfy(value, max_len, n_reads,ref_df.loc[key,'genus'], ref_df.loc[key,'species'])
 else:
     location = (ref_df.columns.get_loc(tax_rank)-1)
     col_name = ref_df.columns[location]
@@ -236,7 +240,7 @@ else:
                 print('The class is', key, 'and the number of reads to be subsampled is', s_reads)
             for keya, value in SeqIO_dicts.items():
                 if ref_df.loc[keya,col_name] == key:
-                    numSeqIO_dicts[keya] = numberfy(value, max_len, s_reads)
+                    numSeqIO_dicts[keya] = numberfy(value, max_len, s_reads, ref_df.loc[keya,'genus'], ref_df.loc[keya,'species'])
                     class_lens_ind.append(s_reads)
         n_reads = minimum_value
     elif len(count_dict) == 1:
