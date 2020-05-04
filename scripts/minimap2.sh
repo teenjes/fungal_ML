@@ -9,7 +9,7 @@ GREEN='\033[0;32m'
 echo -e "${GREEN}This script works through all folders within the input directory ${RED}"$1"${GREEN} and runs the summary_statistics python script to get summary statistics and figures for each file ${WHITE}"
 
 
-for d in "$1"/Concatenated/*; do
+for d in "$1"/Concatenated/clinical; do
 	for f in "$d"/*; do
 		echo "$f"
 		remove='analysis/Concatenated'
