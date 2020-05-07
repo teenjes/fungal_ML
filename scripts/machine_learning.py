@@ -408,6 +408,11 @@ in_dim = X_train.shape[1]
 # model.add(Dense(16, activation='relu'))
 # model.add(Dense(num_class, activation='softmax'))
 # model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+classes_dict = {}
+for i in range(0, len(classes)):
+    classes_dict['%s' % i] = classes[i]
+
 # model.fit(X_train, Y_train, validation_data=(X_test, Y_test), batch_size=100, epochs=100, verbose=1)
 
 model = Sequential()
@@ -461,7 +466,8 @@ print('f1: ', f1)
 # confusion matrix
 matrix = confusion_matrix(Y_test_ints, yhat_classes)
 print(matrix)
-print(pd.crosstab(Y_test_ints, yhat_classes, rownames=['True'], colnames=['Predicted'], margins=True))
+crosstab = pd.crosstab(Y_test_ints, yhat_classes, rownames=['True'], colnames=['Predicted'], margins=True)
+print(crosstab)
 data = [accuracy]
 datacol =['accuracy']
 count = 1
@@ -481,3 +487,9 @@ for i in f1:
     count += 1
 stats = pd.DataFrame(data=[data],columns=datacol)
 stats.to_csv(data_root+'models/stats_%s_%s_%s.csv' % (args.tax_rank,args.name,args.n_reads))
+crosstab.to_csv(data_root+'models/confusion_%s_%s_%s.csv' % (args.tax_rank,args.name,args.n_reads))
+with open(data_root+'models/keys_%s_%s_%s.csv' % (args.tax_rank,args.name,args.n_reads), 'w+') as f:
+    for key in classes_dict.keys():
+        f.write("%s,%s\n"%(key,classes_dict[key]))
+if args.verbose:
+    print(classes_dict)

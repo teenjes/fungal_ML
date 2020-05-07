@@ -36,12 +36,12 @@ group.add_argument("--quiet", "-q", "--q", action="store_true")
 parser.add_argument("input_directory", help="Run from honours folder and input analysis/")
 args = parser.parse_args()
 
-phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Pucciniomycetes;o__Pucciniales;f__Pucciniaceae;g__Puccinia;s__striiformis-tritici',
+phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Pucciniomycetes;o__Pucciniales;f__Pucciniaceae;g__Puccinia;s__striiformis',
              '20171103_FAH15473/barcode02': 'k__Fungi;p__Ascomycota;c__Dothideomycetes;o__Capnodiales;f__Mycosphaerellaceae;g__Zymoseptoria;s__tritici',
              '20171103_FAH15473/barcode03': 'k__Fungi;p__Ascomycota;c__Dothideomycetes;o__Pleosporales;f__Pleosporaceae;g__Pyrenophora;s__tritici-repentis',
              '20171103_FAH15473/barcode04': 'k__Fungi;p__Ascomycota;c__Sordariomycetes;o__Hypocreales;f__Nectriaceae;g__Fusarium;s__oxysporum',
              '20171103_FAH15473/barcode05': 'k__Fungi;p__Ascomycota;c__Pezizomycetes;o__Pezizales;f__Tuberaceae;g__Tuber;s__brumale',
-             '20171103_FAH15473/barcode06': 'k__Fungi;p__Basidiomycota;c__Agaricomyectes;o__Agaricales;f__Cortinariaceae;g__Cortinarius;s__globuliformis',
+             '20171103_FAH15473/barcode06': 'k__Fungi;p__Basidiomycota;c__Agaricomycetes;o__Agaricales;f__Cortinariaceae;g__Cortinarius;s__globuliformis',
              '20171103_FAH15473/barcode07': 'k__Fungi;p__Ascomycota;c__Eurotiomycetes;o__Eurotiales;f__Aspergillaceae;g__Aspergillus;s__niger',
              '20171103_FAH15473/barcode08': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Metschnikowiaceae;g__Clavispora;s__lusitaniae',
         '20171103_FAH15473/barcode09': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Saccharomycetaceae;g__Kluyveromyces;s__unidentified', # formerly Cryptococcus neoformans, matched in both UNITE and tree to Kluyveromyces
@@ -85,9 +85,9 @@ phylogeny = {'20171103_FAH15473/barcode01': 'k__Fungi;p__Basidiomycota;c__Puccin
              '20180108_FAH18647/barcode11': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Pichiaceae;g__Pichia;s__kudriavzevii',
              '20180108_FAH18647/barcode12': 'k__Fungi;p__Ascomycota;c__Saccharomycetes;o__Saccharomycetales;f__Pichiaceae;g__Pichia;s__membranifaciens'}
 
-summary = pd.DataFrame(data=None, columns = ['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','path to raw reads','path to homology filtering','path to length filtering'])
+summary = pd.DataFrame(data=None, columns = ['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','# for use','path to raw reads','path to homology filtering','path to length filtering', 'path for use'])
 import glob
-path = "/media/MassStorage/tmp/TE/honours/analysis/Consensus/*/*/"
+path = "/media/MassStorage/tmp/TE/honours/analysis/Consensus/20*/*/"
 path_names = glob.glob(path)
 for path in path_names:
     if path[-13:-1] != 'unclassified' and path[-28:-1] != '20171207_FAH18654/barcode10' and path[-28:-1] != '20171212_FAH18688/barcode10' and path[-28:-1] != '20180108_FAH18647/barcode07' and path[-28:-1] != '20180108_FAH18647/barcode08':

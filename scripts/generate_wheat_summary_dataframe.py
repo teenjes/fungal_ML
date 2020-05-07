@@ -36,37 +36,29 @@ group.add_argument("--quiet", "-q", "--q", action="store_true")
 parser.add_argument("input_directory", help="Run from honours folder and input analysis/")
 args = parser.parse_args()
 
-suspected = {'barcode01': 's__Puccinia_striiformis',
-             'barcode02': 's__Zymoseptoria_tritici',
-             'barcode03': 's__unknown', # healthy wheat
-             'barcode04': 's__Puccinia_striiformis,s__Zymoseptoria_tritici', # both Pst + Zymo
-             'barcode05': 's__Pyrenophora_tritici-repentis',
-             'barcode06': 's__unknown', # healthy, resistant wheat, 2nd year,
-             'barcode07': 's__unknown', # healthy, susceptible wheat, 2nd year
-             'barcode08': 's__Puccinia_striiformis',
-             'barcode09': 's__Puccinia_striiformis,s__Pyrenophora_tritici-repentis', # both Pst + Pyr
-             'barcode10': 's__Puccinia_striiformis,s__Zymoseptoria_tritici', # both Pst + Zymo
-             'barcode11': 's__Zymoseptoria_tritici,s__Puccinia_striiformis', # Zymo + Pst?
-             'barcode12': 'none'# is just water
+suspected = {'barcode01': 'k__Fungi;p__Basidiomycota;c__Pucciniomycetes;o__Pucciniales;f__Pucciniaceae;g__Puccinia;s__Puccinia_striiformis',
+             'barcode02': 'k__Fungi;p__Ascomycota;c__Dothideomycetes;o__Capnodiales;f__Mycosphaerellaceae;g__Zymoseptoria;s__Zymoseptoria_tritici',
+             'barcode05': 'k__Fungi;p__Ascomycota;c__Dothideomycetes;o__Pleosporales;f__Pleosporaceae;g__Pyrenophora;s__Pyrenophora_tritici-repentis',
             }
 
 
-summary = pd.DataFrame(data=None, columns = ['species 1', 'species 2','# raw reads','# reads after homology filtering','# reads after length filtering','path to raw reads','path to homology filtering','path to length filtering'])
+summary = pd.DataFrame(data=None, columns = ['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','path to raw reads','path to homology filtering','path to length filtering'])
 
 import glob
 path = "/media/MassStorage/tmp/TE/honours/analysis/Length_Filtered/wheat/*/"
 path_names = glob.glob(path)
 for path in path_names:
-    if path[-13:-1] != 'unclassified' and path[-10:-1] != 'barcode12':
+    if path[-10:-1] == 'barcode01' or path[-10:-1] == 'barcode02' or path[-10:-1] == 'barcode05':
         key = path[-10:-1]
         if args.verbose:
             print('\033[0;34m' + "Opened barcode " + '\033[0;35m' + key + '\033[1;37m')
-        if len(suspected[key].split(',')) == 1:
-            species1 = suspected[key].split(',')[0].split('__')[1]
-            species2 = None
-        elif len(suspected[key].split(',')) == 2:
-            species1 = suspected[key].split(',')[0].split('__')[1]
-            species2 = suspected[key].split(',')[1].split('__')[1]
+        species_ = suspected[key].split(';')[6].split('__')[1].lower()
+        genus_ = suspected[key].split(';')[5].split('__')[1].lower()
+        family_ = suspected[key].split(';')[4].split('__')[1].lower()
+        order_ = suspected[key].split(';')[3].split('__')[1].lower()
+        class_ = suspected[key].split(';')[2].split('__')[1].lower()
+        phylum_ = suspected[key].split(';')[1].split('__')[1].lower()
+        kingdom_ = suspected[key].split(';')[0].split('__')[1].lower()
         
         if args.verbose:
             print('\033[1;36m' + "BEGIN RAW"'\033[1;37m')
@@ -99,10 +91,10 @@ for path in path_names:
         use_count = length_count
 
 
-        add = pd.DataFrame([[species1, species2, raw_count, homology_count, length_count, use_count, raw_path, homology_path, length_path, use_path]], columns = ['species1', 'species2','# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use'], index=[key])
+        add = pd.DataFrame([[species_, genus_, family_, order_, class_, phylum_, kingdom_, raw_count, homology_count, length_count, use_count, raw_path, homology_path, length_path, use_path]], columns = ['species','genus','family','order','class','phylum','kingdom', '# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use'], index=[key])
         summary = summary.append([add])
 summary = summary.sort_index(axis=0)
-summary = summary[['species1', 'species2','# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use']]
+summary = summary[['species','genus','family','order','class','phylum','kingdom','# raw reads','# reads after homology filtering','# reads after length filtering','# for use', 'path to raw reads','path to homology filtering','path to length filtering', 'path for use']]
 summary.to_csv("analysis/Stats/wheat_reference_dataframe.csv")
 if args.verbose:
             print('\033[0;34m' + "Reference Dataframe saved to " + '\033[0;35m' + "analysis/Stats/wheat_reference_dataframe.csv" + '\033[1;37m')
