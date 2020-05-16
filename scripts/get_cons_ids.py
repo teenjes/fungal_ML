@@ -48,7 +48,7 @@ if args.verbose:
     print('\033[0;31m' + "Input file is " + args.input_file + '\033[1;37m')
 
 m = Mothur()
-m.pcr.seqs(fasta=args.input_file,oligos='ITS_primers.oligos',pdiffs=2,rdiffs=2)
+m.pcr.seqs(fasta=args.input_file,oligos='ITS_primers.oligos',pdiffs=0,rdiffs=0)
 pcr_dict = SeqIO.to_dict(SeqIO.parse(args.input_file[:-5]+"pcr.fasta","fasta"))
 ids = []
 for key in pcr_dict:
@@ -63,14 +63,14 @@ if args.verbose:
     
 tmp_dict = SeqIO.to_dict(SeqIO.parse(args.input_file,"fasta"))
 new_dict = tmp_dict.copy()
-if len(ids) > 500:
-    keys_list = random.sample(ids,k=500)
+if len(ids) > 100:
+    keys_list = random.sample(ids,k=100)
 else:
     print('\033[1;37m' + "LOW READS")
 for key in new_dict:
     if key not in keys_list:
         del tmp_dict[key]
-SeqIO.write(tmp_dict.values(),('Consensus'+args.input_file[15:-29]+'for_consensus_500.fasta'),'fasta')
+SeqIO.write(tmp_dict.values(),('Consensus'+args.input_file[15:-29]+'for_consensus.fasta'),'fasta')
 
 if args.verbose:
-    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + ('Consensus'+args.input_file[15:-29]+'for_consensus_500.fasta') + '\033[1;37m')
+    print('\033[0;34m' + "Ids file saved to " + '\033[0;35m' + ('Consensus'+args.input_file[15:-29]+'for_consensus.fasta') + '\033[1;37m')

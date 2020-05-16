@@ -20,8 +20,12 @@ Contents
 				- homology_genus.fasta
 					- *Database file containing the sequences used for frDNA homology filtering*
 - scripts (Directory)
+	- create_consensus_100.sh
+		- *Script for applying Muscle to generate an alignment file for use in consensus generation*
 	- deepbinner_script.sh
 		- *Script for taking an input directory containing mixed fast5 reads and processing them through Deepbinner, specifying an output directory for demultiplexed single-read fast5 files*
+	- get_cons_ids.py
+		- *Script that applies Mothur to remove primer sequences and subsamples 100 reads for use in consensus generation*
 	- guppy_script.sh
                 - *Script for taking all folders within an input directory containing demultiplexed multi-read fast5 files and basecalling them using the Guppy basecaller, specifying a output directory for basecalled fastq files*
 	- homology_map.sh

@@ -7,10 +7,7 @@ NC='\033[0m'
 GREEN='\033[0;32m'
 
 
-echo -e "${GREEN}This script works through all files (using those in the ${RED}"$1"${GREEN} directory for reference) and runs the summary_statistics python script to get summary statistics and figures for each file ${WHITE}"
-
-
-for file in "$1"clinical/*/for_consensus.fasta; do
+for file in "$1"*/*/for_consensus.fasta; do
 	        echo -e "${GREEN} The input file is $file ${WHITE}"
 		        STR=$file
 			        starter=${file%/*}
