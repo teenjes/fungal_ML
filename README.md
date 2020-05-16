@@ -20,16 +20,22 @@ Contents
 				- homology_genus.fasta
 					- *Database file containing the sequences used for frDNA homology filtering*
 - scripts (Directory)
+	- cleanup_100.py
+		- *Scrpt for removing non-nucleotide characters from a consensus sequence*
 	- create_consensus_100.sh
 		- *Script for applying Muscle to generate an alignment file for use in consensus generation*
 	- deepbinner_script.sh
 		- *Script for taking an input directory containing mixed fast5 reads and processing them through Deepbinner, specifying an output directory for demultiplexed single-read fast5 files*
+	- emboss_cons_100.sh
+		- *Script for creating a consensus sequence from an alignment file, then subsequently applying the cleanup_100.py script to remove non-nucleotide characters eg. 'n' or 'N'*
 	- get_cons_ids.py
 		- *Script that applies Mothur to remove primer sequences and subsamples 100 reads for use in consensus generation*
 	- guppy_script.sh
                 - *Script for taking all folders within an input directory containing demultiplexed multi-read fast5 files and basecalling them using the Guppy basecaller, specifying a output directory for basecalled fastq files*
 	- homology_map.sh
 		- *Script for taking all folders within an input directory and applying the minimap2 program to map reads against a custom-curated database formed of 29 sequences (analysis/Python_Processing/homology/homology_genus_info.txt) for assessing frDNA homology*
+	- make_database_100.sh
+		- *Script to collectall consensus sequences in the one file*
 	- ontfast5api.sh
 		- *Script for taking an input directory containing single-read fast5 files and processing them through the ont_fast5_api software from Oxford Nanopore, specifying an output directory for multi-read fast5 files*
 	- summary_statistics.py
