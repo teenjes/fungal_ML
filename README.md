@@ -44,4 +44,13 @@ Contents
 		- *Bash script that loops an automates the summary_statistics python script across each sample present in the input directory*
 	- tensorflow_test.py
 		- *Script for testing whether TensorFlow, required for Deepbinner, is being run on CPU or GPU*
+	- Notebooks (Directory)
+		- Alignment-Based_Workbook.ipynb
+			- *Python notebook for using minimap2 to map reads against the Consensus and Qiime databases*
+		- Application_alignment.ipynb
+			- *Python notebook for subsampling the wheat and synthetic mock community datasets, then applying the alignment-based technique to both datasets for each of the Consensus and Qiime databases*
+		- Crossmapping.ipynb
+			- *Python notebook for assessing the relationship between the coss-mapping fraction for reads against the Consensus database and the genetic distance between species*
+		- machine_learning_script.ipynb
+			- *Python notebook for the generation of machine learning models, and for the use of those models when applied to the synthetic mock community and wheat datasets*
 
