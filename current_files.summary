@@ -1,4 +1,0 @@
-accnos=analysis/Length_Filtered/20180108_FAH18647/unclassified/length_restricted_reads.bad.accnos
-fasta=analysis/Length_Filtered/20180108_FAH18647/unclassified/length_restricted_reads.pcr.fasta
-oligos=analysis/ITS_primers.oligos
-processors=12
