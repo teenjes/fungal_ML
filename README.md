@@ -6,7 +6,7 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 
 - database
   - fungal_scpecies_consensus_seqs_44.txt
-    - *the gold standard database conaining consensus sequences for each of the 44 species*
+    - *the gold standard database containing consensus sequences for each of the 44 species*
 - scripts
   - Notebooks
     - kraken2_application.ipynb
@@ -15,6 +15,14 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
       - *jupyter notebook for applying ML to species for accuracy at each taxonomic rank*
     - machine_learning_python_function_gen.ipynb
       - *jupyter notebook for generating python script to creat each ML model*
+  - homology_filtering_commands.sh
+    - *command for application of minimap2 to original fastq files for homology filtering*
+  - kraken2_commands.sh
+    - *command for application of kraken2 to original fastq files for homology filtering*
+  - length_filtering_and_stats_commands.py
+    - *python notebook for applying length filtering and generating summary tables and figures of data*
+  - minimap2_commands.sh
+    - *command for application of minimap2 to original fastq files for alignment of reads to the gold standard and NCBI databases*
 
 ## Required packages
 **Bash**
