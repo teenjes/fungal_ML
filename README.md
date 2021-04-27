@@ -26,21 +26,21 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 
 ## Required packages
 **Bash**
-> minimap2
-> kraken2
+> minimap2 <br>
+> kraken2 <br>
 **Python**
-> argparse
-> Biopython
-> ete3 - NCBITaxa
-> json
-> keras
-> math
-> matplotlib
-> numpy
-> os
-> pandas
-> random
-> sklearn
-> subprocess
+> argparse <br>
+> Biopython <br>
+> ete3 - NCBITaxa <br>
+> json <br>
+> keras <br>
+> math <br>
+> matplotlib <br>
+> numpy <br>
+> os <br>
+> pandas <br>
+> random <br>
+> sklearn <br>
+> subprocess <br>
 
 ## 
