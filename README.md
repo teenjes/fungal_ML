@@ -47,5 +47,5 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 
 ## Credits
 
-Tavish Eenjes <br>
-Yiheng Hu
+**Tavish Eenjes <br>
+Yiheng Hu**
