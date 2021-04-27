@@ -28,6 +28,8 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 **Bash**
 > minimap2 <br>
 > kraken2 <br>
+<br>
+
 **Python**
 > argparse <br>
 > Biopython <br>
