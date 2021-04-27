@@ -45,4 +45,7 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 > sklearn <br>
 > subprocess <br>
 
-## 
+## Credits
+
+Tavish Eenjes <br>
+Yiheng Hu
