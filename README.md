@@ -5,7 +5,7 @@ Repository for code involved in filtering DNA sequencing reads, generating machi
 ## Table of Contents
 
 - database
-  - fungal_scpecies_consensus_seqs_44.txt
+  - fungal_species_consensus_seqs_44.fasta
     - *the gold standard database containing consensus sequences for each of the 44 species*
 - scripts
   - Notebooks
