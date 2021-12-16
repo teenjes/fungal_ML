@@ -50,3 +50,4 @@ As a proof-of-concept, we demonstrate the applicability of a linked machine lear
     <br>
     
 ![Screenshot](example_decision_tree.png)
+An example path through the machine learning decision tree, highlighted in red, demonstrating how a read is passed down the tree from the kingdom-level classifier that distinguishes between phyla, all the way down to the genus-level classifier that distinguishes between species. Note that not all steps along the path are nodes, which can be remedied by increasing the diversity of taxa chosen for training. 
