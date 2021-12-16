@@ -1,4 +1,4 @@
-<p align="center"># Linked machine learning classifiers improve species classification of fungi when using error-prone long-reads on extended metabarcodes</p>
+# Linked machine learning classifiers improve species classification of fungi when using error-prone long-reads on extended metabarcodes
 ___
 
 A proof-of-concept for the use of linked machine learning classifiers for the purpose of detecting key target species from basecalled Oxford Nanopore reads.
@@ -33,8 +33,8 @@ ___
 
 ### Creating a Linked Machine Learning Decision Tree
 As a proof-of-concept, we demonstrate the applicability of a linked machine learning decision tree. Here, we lay out the steps necessary to generate your own decision tree for use for fungal species detection. 
-
-1. Obtain DNA sequence for the same region for a number of different species across the fungal kingdom, including the target species and several close relatives from the same family and genus, and filter for higher quality reads to improve the accuracy of training. Ensure you have the full taxonomic information for each species used<sup>1<sup> <br>
+ 
+    1. Obtain DNA sequence for the same region for a number of different species across the fungal kingdom, including the target species and several close relatives from the same family and genus, and filter for higher quality reads to improve the accuracy of training. Ensure you have the full taxonomic information for each species used<sup>1<sup> <br>
 <br>
     2. Using a cladogram, identify the nodes where two or more taxa diverge, and note all samples that belong to each branch of the node. For each node, randomly subsample an equal number of reads from all species belonging to each branch, such that the number of subsampled reads for each branch at a node is equal, and representative of the samples belonging to that node <br>
 <br>
