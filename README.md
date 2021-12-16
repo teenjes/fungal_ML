@@ -48,4 +48,4 @@ As a proof-of-concept, we demonstrate the applicability of a linked machine lear
     <br>
 7. Link the resultant models together such that a read is passed along the paths in the decision tree based on the output of the machine learning classifiers. For example, if the output of the model that distinguishes between fungal phyla outputs that a read belongs to the Ascomycota phylum, the read is input to the next node along that path (likely the model that distinguishes between classes within the Ascomycota phylum). See below <br>
     <br>
-![Alt text](/example_decision_tree.png?raw=true)
+![Alt text](./example_decision_tree.png?raw=true "Title")
