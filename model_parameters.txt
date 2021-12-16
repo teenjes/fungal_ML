@@ -1,0 +1,12 @@
+model = Sequential()
+model.add(Conv1D(filters=64, kernel_size=3, activation='relu', input_shape=(X_train.shape[1],1)))
+model.add(Conv1D(filters=64, kernel_size=3, activation='relu'))
+model.add(Dropout(0.5))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Flatten())
+model.add(Dense(100, activation='relu'))
+model.add(Dense(num_class, activation='softmax'))
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.summary()
+
+model.fit(np.expand_dims(X_train,2), Y_train, validation_data=(np.expand_dims(X_test,2), Y_test), batch_size=128, epochs=10, verbose=1)
