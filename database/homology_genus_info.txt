@@ -1,0 +1,30 @@
+A total of 28 sequences are included within the homology_genus.fasta file for assessing frDNA homology.
+
+ - Aspergillus (https://www.ncbi.nlm.nih.gov/nuccore/KY992937) - 5052
+ - Blastobotrys (https://www.ncbi.nlm.nih.gov/nuccore/LT160958) - 43971
+ - Candida (https://www.ncbi.nlm.nih.gov/nuccore/KY102341) - 1535326
+ - Cladophialophora (https://www.ncbi.nlm.nih.gov/nuccore/LC189025) - 82105
+ - Cortinarius (https://www.ncbi.nlm.nih.gov/nuccore/57869126) - 304728
+ - Cryptococcus (https://www.ncbi.nlm.nih.gov/nuccore/AY969728) - 5206
+ - Diaporthe (https://www.ncbi.nlm.nih.gov/nuccore/LC041053) - 36922
+ - Dothiorella (https://www.ncbi.nlm.nih.gov/nuccore/KR611882) - 276832
+ - Entoleuca (https://www.ncbi.nlm.nih.gov/nuccore/KY009732) - 97379
+ - Fusarium (https://www.ncbi.nlm.nih.gov/nuccore/KJ160147) - 5506
+ - Geotrichum (https://www.ncbi.nlm.nih.gov/nuccore/JQ291803) - 43987
+ - Kluyveromyces (https://www.ncbi.nlm.nih.gov/nuccore/KT853036) - 4910
+ - Kodamaea (https://www.ncbi.nlm.nih.gov/nuccore/MF061602) - 77850
+ - Meyerozyma (https://www.ncbi.nlm.nih.gov/nuccore/KY673531) - 766728
+ - Oculimacula/Tapesia (https://www.ncbi.nlm.nih.gov/nuccore/AY713294) - 228665
+ - Penicillium (https://www.ncbi.nlm.nih.gov/nuccore/JQ905784) - 5073
+ - Pichia (https://www.ncbi.nlm.nih.gov/nuccore/AM905031) - 4919
+ - Puccinia (https://www.ncbi.nlm.nih.gov/nuccore/DQ417402) - 5296
+ - Pyrenophora (https://www.ncbi.nlm.nih.gov/nuccore/FJ907535) - 5027
+ - Quambalaria (https://www.ncbi.nlm.nih.gov/nuccore/DQ823420) - 218126
+ - Rhodotorula (https://www.ncbi.nlm.nih.gov/nuccore/HM069380) - 5533
+ - Saccharomyces (https://www.ncbi.nlm.nih.gov/nuccore/MG547774) - 4930
+ - Scedosporium (https://www.ncbi.nlm.nih.gov/nuccore/AM712309) - 5597
+ - Tuber (https://www.ncbi.nlm.nih.gov/nuccore/HM370491) - 36048
+ - Wickerhamomyces (https://www.ncbi.nlm.nih.gov/nuccore/KY102329) - 599737
+ - Yamadazyma (https://www.ncbi.nlm.nih.gov/nuccore/LN875184) - 766765
+ - Zygoascus (https://www.ncbi.nlm.nih.gov/nuccore/AY447031) - 5620
+ - Zymoseptoria (https://www.ncbi.nlm.nih.gov/nuccore/KM246156) - 1047167
