@@ -50,4 +50,6 @@ An example path through the machine learning decision tree, highlighted in red, 
 ___
 
 ### Running a Linked Machine Learning Decision Tree
-In order to run the decision tree on basecalled reads, first convert the reads to the same integer or one-hot encoding used to train the models. Then, feed the reads into the linked decision tree and record the outputs. We recommend making use of threading to increase the rate at which this can be done.
+In order to run the decision tree on basecalled reads, first convert the reads to the same integer or one-hot encoding used to train the models. Then, feed the reads into the linked decision tree and record the outputs. We recommend making use of threading to increase the rate at which this can be done. <br> <br>
+
+Additonal taxa can be added to this decision tree. This requires retraining all models within the path of tree descent, to a maximum of 6 retrained models due to the way the decision tree is designed. Dictionaries of taxa would also have to be updated. We are working on optimising the code for end-user use that will include easy ability to add additional taxa. 
