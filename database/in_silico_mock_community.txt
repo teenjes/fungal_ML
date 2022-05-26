@@ -1,0 +1,13 @@
+Aspergillus flavus
+Aspergillus niger
+Candida albicans
+Candida metapsilosis
+Candida orthopsilosis
+Diaporthe foenicula
+Diaporthe sp.
+Puccinia striiformis-tritici
+Pyrenophora tritici-repentis
+Rhodotorula mucilaginosa
+Saccharomyces cerevisiae
+Scedosporium boydii
+Zymoseptoria tritici
